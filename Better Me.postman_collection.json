@@ -1,0 +1,417 @@
+{
+	"info": {
+		"_postman_id": "e02392af-027f-4f88-a483-9d2021cb25c1",
+		"name": "Better Me",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18705461"
+	},
+	"item": [
+		{
+			"name": "Create Pet",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"randomID\", Math.floor(Math.random() * 1000000));",
+							"",
+							"function getRandomName() {",
+							"    const names = ['Alex', 'Maria', 'John', 'Sophia', 'David', 'Emma', 'Chris', 'Olivia'];",
+							"    return names[Math.floor(Math.random() * names.length)];",
+							"}",
+							"pm.environment.set(\"randomName\", getRandomName());",
+							"",
+							"function getRandomStatus() {",
+							"    const statuses = ['available', 'pending', 'sold'];",
+							"    return statuses[Math.floor(Math.random() * statuses.length)];",
+							"}",
+							"pm.environment.set(\"randomStatus\", getRandomStatus());",
+							"",
+							"",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"randomID is set and is a number\", function () {",
+							"    var randomID = pm.environment.get(\"randomID\");",
+							"    pm.expect(randomID).to.be.above(0); ",
+							"    pm.expect(randomID).to.be.below(1000000); ",
+							"});",
+							"",
+							"pm.test(\"randomName is set and is a valid name\", function () {",
+							"    var randomName = pm.environment.get(\"randomName\");",
+							"    const validNames = ['Alex', 'Maria', 'John', 'Sophia', 'David', 'Emma', 'Chris', 'Olivia'];",
+							"    pm.expect(validNames).to.include(randomName);",
+							"});",
+							"",
+							"pm.test(\"randomStatus is set and is a valid status\", function () {",
+							"    var randomStatus = pm.environment.get(\"randomStatus\");",
+							"    const validStatuses = ['available', 'pending', 'sold'];",
+							"    pm.expect(validStatuses).to.include(randomStatus); ",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\": {{randomID}},\n\n  \"name\": \"{{randomName}}\",\n  \n  \"status\": \"{{randomStatus}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://petstore.swagger.io/v2/pet",
+					"protocol": "https",
+					"host": [
+						"petstore",
+						"swagger",
+						"io"
+					],
+					"path": [
+						"v2",
+						"pet"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find by ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"packages": {},
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://petstore.swagger.io/v2/pet/{{randomID}}",
+					"protocol": "https",
+					"host": [
+						"petstore",
+						"swagger",
+						"io"
+					],
+					"path": [
+						"v2",
+						"pet",
+						"{{randomID}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Pet",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const tagNames = ['first', 'second', 'third', 'four', 'five'];",
+							"const categoryNames = ['Work', 'Personal', 'Shopping', 'Health', 'Education']",
+							"",
+							"const tagID = Math.floor(Math.random() * 100) + 1;",
+							"const categoryID = Math.floor(Math.random() * 100) + 1;",
+							"",
+							"const tagName = tagNames[Math.floor(Math.random() * tagNames.length)];",
+							"const categoryName = categoryNames[Math.floor(Math.random() * categoryNames.length)];",
+							"",
+							"pm.environment.set(\"tagName\", tagName);",
+							"pm.environment.set(\"tagID\", tagID);",
+							"pm.environment.set(\"categoryID\", categoryID);",
+							"pm.environment.set(\"categoryName\", categoryName);",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"     pm.response.to.have.status(200);",
+							"});",
+							"",
+							"const tagNames = ['first', 'second', 'third', 'four', 'five'];",
+							"const categoryNames = ['Work', 'Personal', 'Shopping', 'Health', 'Education'];",
+							"",
+							"const tagName = pm.environment.get(\"tagName\");",
+							"const tagID = pm.environment.get(\"tagID\");",
+							"const categoryID = pm.environment.get(\"categoryID\");",
+							"const categoryName = pm.environment.get(\"categoryName\");",
+							"",
+							"",
+							"pm.test(\"tagName is valid\", function () {",
+							"pm.expect(tagNames).to.include(tagName);});",
+							"",
+							"pm.test(\"tagID is within the valid range\", function () {",
+							"    pm.expect(tagID).to.be.a('number');",
+							"    pm.expect(tagID).to.be.above(0);",
+							"    pm.expect(tagID).to.be.below(101);",
+							"});",
+							"",
+							"pm.test(\"categoryID is within the valid range\", function () {",
+							"    pm.expect(categoryID).to.be.a('number');",
+							"    pm.expect(categoryID).to.be.above(0);",
+							"    pm.expect(categoryID).to.be.below(101);",
+							"});",
+							"",
+							"pm.test(\"categoryName is valid\", function () {",
+							"    pm.expect(categoryNames).to.include(categoryName);",
+							"});",
+							"",
+							"    ",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\": {{randomID}},\n  \"category\": {\n    \"id\": {{categoryID}},\n    \"name\": \"{{categoryName}}\"\n  },\n  \"name\": \"{{randomName}}\",\n  \"tags\": [\n    {\n      \"id\": {{tagID}},\n      \"name\": \"{{tagName}}\"\n    }\n  ],\n  \"status\": \"{{randomStatus}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://petstore.swagger.io/v2/pet",
+					"protocol": "https",
+					"host": [
+						"petstore",
+						"swagger",
+						"io"
+					],
+					"path": [
+						"v2",
+						"pet"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find by ID",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.expect(pm.response).to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://petstore.swagger.io/v2/pet/{{randomID}}",
+					"protocol": "https",
+					"host": [
+						"petstore",
+						"swagger",
+						"io"
+					],
+					"path": [
+						"v2",
+						"pet",
+						"{{randomID}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Pet",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://petstore.swagger.io/v2/pet/{{randomID}}",
+					"protocol": "https",
+					"host": [
+						"petstore",
+						"swagger",
+						"io"
+					],
+					"path": [
+						"v2",
+						"pet",
+						"{{randomID}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://petstore.swagger.io/v2/pet/{{randomID}}",
+					"protocol": "https",
+					"host": [
+						"petstore",
+						"swagger",
+						"io"
+					],
+					"path": [
+						"v2",
+						"pet",
+						"{{randomID}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "randomID",
+			"value": "",
+			"type": "string",
+			"disabled": true
+		}
+	]
+}
