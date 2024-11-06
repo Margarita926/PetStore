@@ -1,3 +1,4 @@
+PUT https://petstore.swagger.io/v2/pet 
 
 pm.test("Status code 200", function () {
     pm.expect(pm.response).to.have.status(200);
