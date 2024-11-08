@@ -20,6 +20,7 @@ POST https://petstore.swagger.io/v2/pet
 - **Pre-conditions:** Pre-field required fields: id, name, status.
 - **Post-conditions:** The response includes an error message for invalid types.
 - **Test Steps:**
+  
     1. Send a request with invalid data types for one or more fields:
     - Id: Set as a string instead of number.
     - Category id: Set as a string instead of number.
