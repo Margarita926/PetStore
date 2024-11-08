@@ -5,8 +5,8 @@ POST https://petstore.swagger.io/v2/pet
 
 - **Pre-conditions:** Postman Collection Runner is set up to simulate multiple requests (e.g., 1000 requests per second) for API endpoint.
 - **Test Steps:**
-1. Send a request with and dynamically change valid data including required fields.
-2. Start the test and monitor the API’s response for:
+i. Send a request with and dynamically change valid data including required fields.
+ii. Start the test and monitor the API’s response for:
 
 **-Response Time:** Each request should return within a specified response time (200ms).
 **-Status Codes:** return a status code of 200.
@@ -131,5 +131,5 @@ POST https://petstore.swagger.io/v2/pet
 
 **Test Case Steps:**
 
-1. Send an image upload request with an unsupported file type.
+i. Send an image upload request with an unsupported file type.
 - **Expected Result:** 400 status is returned with an error message for invalid file types.
