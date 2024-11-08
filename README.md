@@ -59,7 +59,7 @@ ii. Start the test and monitor the API’s response for:
 
 **Test Steps:**
 
-1. Send a request to create a second entry with a specific “xyz” id.
+i. Send a request to create a second entry with a specific “xyz” id.
 
 **Expected Result:** The response returns 400 status code, with an error message  “id must be unique.”
 
