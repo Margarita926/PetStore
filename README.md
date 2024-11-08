@@ -9,6 +9,7 @@ i. Send a request with and dynamically change valid data including required fiel
 ii. Start the test and monitor the API’s response for:
 
 **-Response Time:** Each request should return within a specified response time (200ms).
+
 **-Status Codes:** return a status code of 200.
 
 **Expected result:** The API responds within acceptable performance limits without significant degradation or errors.
