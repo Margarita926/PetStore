@@ -58,7 +58,7 @@ ii. Start the test and monitor the API’s response for:
 **Pre-conditions:** The first entry with “xyz” id is successfully created. 
                               Pre-field required fields: name, status.
 
-**Test Steps:**
+- **Test Steps:**
 
 i. Send a request to create a second entry with a specific “xyz” id.
 
@@ -130,7 +130,7 @@ i. Send a request to create a second entry with a specific “xyz” id.
 
 - **Pre-conditions:** Pre-field required fields: id, name, status.
 
-**Test Case Steps:**
+- **Test Steps:**
 
 i. Send an image upload request with an unsupported file type.
 - **Expected Result:** 400 status is returned with an error message for invalid file types.
