@@ -9,7 +9,7 @@ POST https://petstore.swagger.io/v2/pet
 2. Start the test and monitor the API’s response for:
 
 **-Response Time:** Each request should return within a specified response time (200ms).
--**Status Codes:** return a status code of 200.
+**-Status Codes:** return a status code of 200.
 
 **Expected result:** The API responds within acceptable performance limits without significant degradation or errors.
 
